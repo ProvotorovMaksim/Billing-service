@@ -1,7 +1,7 @@
 from fastapi import APIRouter as Router, Depends, HTTPException
 from db_provider import get_db, AsyncSession, get_subscription, get_tariff, add_payment, set_payment_id, payment_callback
-from schemas import PaymentRequest, PaymentConfirmationRequest, Payment
-from models import PaymentStatus
+from schemas import PaymentRequest, PaymentConfirmationRequest
+from models import PaymentStatus, Payment
 from yookassa_service import YookassaService
 from kafka_producer import publish_payment_success
 from logging import getLogger
@@ -37,7 +37,7 @@ async def create_payment(
         order_id=payment_data.order_id
     )
 
-    await set_payment_id(payment, yookassa_result, db)
+    await set_payment_id(payment.id, yookassa_result["yookassa_payment_id"], db)
 
     return {
         "order_id": payment_data.order_id,
@@ -52,7 +52,7 @@ async def yookassa_webhook(
     if confirmation.event != "payment.succeded":
         return {"status": "ignored"}
 
-    payment = await payment_callback(PaymentConfirmationRequest.payment_id, db)
+    payment = await payment_callback(confirmation.yookassa_payment_id, db)
 
     if payment is None:
         logger.error("payment is null")
