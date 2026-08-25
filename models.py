@@ -1,8 +1,10 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Enum as SQLEnum
-from sqlalchemy.orm import relationship
-from db_provider import Base
+from sqlalchemy.orm import relationship, DeclarativeBase
 from datetime import datetime
 import enum
+
+class Base(DeclarativeBase):
+    pass
 
 class SubscriptionStatus(str, enum.Enum):
     ACTIVE = "active"
