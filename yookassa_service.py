@@ -7,7 +7,7 @@ Configuration.secret_key = settings.YOOKASSA_SECRET_KEY
 
 class YookassaService:
     @staticmethod
-    def create_payment(amount: float, description: str, order_id: str):
+    def create_payment(amount: float, description: str, order_id: str) -> dict:
         payment = Payment.create({
             "amount": {
                 "value": str(amount),
