@@ -1,7 +1,7 @@
 from confluent_kafka import Producer
 from logging import getLogger
 from settings import settings
-from schemas import Payment
+from models import Payment
 
 logger = getLogger("kafkaproducer")
 logger.setLevel("INFO")

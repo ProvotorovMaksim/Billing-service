@@ -12,7 +12,7 @@ class PaymentRequest(BaseModel):
 
 class PaymentConfirmationRequest(BaseModel):
     event: str
-    payment_id: str
+    yookassa_payment_id: str
 
 class Tariff(BaseModel):
     name: str
@@ -23,9 +23,6 @@ class Tariff(BaseModel):
 class Subscription(BaseModel):
     user_id: int
     tariff_id: int
-    status: SubscriptionStatus
-    start_date: datetime
-    end_date: datetime
 
 class Payment(BaseModel):
     subscription_id: int
@@ -46,5 +43,3 @@ class Payment(BaseModel):
         self.user_id = user_id
         self.amount = amount
         self.status = status
-
-    

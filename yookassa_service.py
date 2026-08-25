@@ -26,7 +26,7 @@ class YookassaService:
 
         assert payment.confirmation is not None
         return {
-            "payment_id": payment.id,
+            "yookassa_payment_id": payment.id,
             "confirmation_url": payment.confirmation.confirmation_url
         }
 
