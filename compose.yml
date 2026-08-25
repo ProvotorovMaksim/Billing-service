@@ -21,7 +21,7 @@ services:
       - "8008:8008"
     environment:
       DATABASE_URL: postgresql+asyncpg://admin:password@postgres_billing_db:5432/payments
-      KAFKA_BROKER_URL: 0.0.0.0:9092
+      KAFKA_BROKER_URL: kafka:9092
     depends_on:
       - db
     networks:
