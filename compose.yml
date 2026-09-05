@@ -30,6 +30,6 @@ volumes:
   postgres_billing_data:
 
 networks:
-  driver: bridge
   saas_network:
+    driver: bridge
     external: true
