@@ -3,11 +3,9 @@ services:
     image: postgres:15-alpine
     container_name: postgres_billing_db
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: payments
-    ports:
-      - "5433:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_billing_data:/var/lib/postgresql/data
     networks:
@@ -20,8 +18,8 @@ services:
     ports:
       - "8008:8008"
     environment:
-      DATABASE_URL: postgresql+asyncpg://admin:password@postgres_billing_db:5432/payments
-      KAFKA_BROKER_URL: kafka:9092
+      DATABASE_URL: ${DATABASE_URL}
+      KAFKA_BROKER_URL: ${KAFKA_BROKER_URL}
     depends_on:
       - db
     networks:
